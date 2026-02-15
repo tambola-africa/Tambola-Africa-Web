@@ -10,8 +10,9 @@ export default async function Home() {
 
   return (
     <div className="bg-zinc-50 dark:bg-black">
-      <section className="mx-auto w-full max-w-6xl px-4 py-14 md:py-20">
-        <div className="grid gap-10 md:grid-cols-2 md:items-center">
+      <section className="bg-[linear-gradient(135deg,rgba(22,163,74,0.10),rgba(245,158,11,0.10))] dark:bg-[linear-gradient(135deg,rgba(34,197,94,0.12),rgba(251,191,36,0.10))]">
+        <div className="mx-auto w-full max-w-6xl px-4 py-14 md:py-20">
+          <div className="grid gap-10 md:grid-cols-2 md:items-center">
           <div className="space-y-6">
             <div className="inline-flex rounded-full border border-black/10 bg-white px-3 py-1 text-xs font-semibold text-black/80 dark:border-white/10 dark:bg-black dark:text-white/80">
               Priorité humanitaire : communauté camerounaise (Cameroun & diaspora)
@@ -74,7 +75,7 @@ export default async function Home() {
               <div className="text-sm font-semibold text-black/80 dark:text-white/80">
                 Notre mission
               </div>
-              <div className="rounded-2xl bg-zinc-50 p-5 text-black/80 dark:bg-white/5 dark:text-white/80">
+              <div className="rounded-2xl bg-[var(--surface)] p-5 text-black/80 dark:bg-white/5 dark:text-white/80">
                 “Offrir une chance de gagner à tous, pour aider concrètement la
                 communauté camerounaise à se relever, entreprendre et sortir de la
                 précarité.”
@@ -109,12 +110,13 @@ export default async function Home() {
               </div>
             </div>
           </div>
+          </div>
         </div>
       </section>
 
       <section className="mx-auto w-full max-w-6xl px-4 pb-14 md:pb-20">
         <div className="grid gap-6 md:grid-cols-3">
-          <div className="rounded-3xl border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-black">
+          <div className="rounded-3xl border border-black/10 border-t-4 border-t-[var(--gold)] bg-white p-6 dark:border-white/10 dark:bg-black">
             <h2 className="text-lg font-semibold text-black dark:text-white">
               Pourquoi la communauté camerounaise ?
             </h2>
@@ -125,7 +127,7 @@ export default async function Home() {
               à tous.
             </p>
           </div>
-          <div className="rounded-3xl border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-black">
+          <div className="rounded-3xl border border-black/10 border-t-4 border-t-[var(--accent)] bg-white p-6 dark:border-white/10 dark:bg-black">
             <h2 className="text-lg font-semibold text-black dark:text-white">
               Comment ça fonctionne
             </h2>
@@ -135,18 +137,18 @@ export default async function Home() {
               ticket unique vous est généré (QR + PDF).
             </p>
             <a
-              className="mt-4 inline-flex text-sm font-semibold hover:underline"
+              className="mt-4 inline-flex text-sm font-semibold text-[var(--gold-hover)] hover:underline"
               href="/fonctionnement"
             >
               Voir le détail
             </a>
           </div>
-          <div className="rounded-3xl border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-black">
+          <div className="rounded-3xl border border-black/10 border-t-4 border-t-[var(--gold)] bg-white p-6 dark:border-white/10 dark:bg-black">
             <h2 className="text-lg font-semibold text-black dark:text-white">
               Nos impacts (compteurs)
             </h2>
             <div className="mt-4 grid grid-cols-3 gap-3 text-center">
-              <div className="rounded-2xl bg-zinc-50 p-4 dark:bg-white/5">
+              <div className="rounded-2xl bg-[var(--surface)] p-4 dark:bg-white/5">
                 <div className="text-xl font-semibold text-black dark:text-white">
                   {metrics.participants_count}
                 </div>
@@ -154,7 +156,7 @@ export default async function Home() {
                   participants
                 </div>
               </div>
-              <div className="rounded-2xl bg-zinc-50 p-4 dark:bg-white/5">
+              <div className="rounded-2xl bg-[var(--surface)] p-4 dark:bg-white/5">
                 <div className="text-xl font-semibold text-black dark:text-white">
                   {metrics.projects_helped_count}
                 </div>
@@ -162,7 +164,7 @@ export default async function Home() {
                   projets aidés
                 </div>
               </div>
-              <div className="rounded-2xl bg-zinc-50 p-4 dark:bg-white/5">
+              <div className="rounded-2xl bg-[var(--surface)] p-4 dark:bg-white/5">
                 <div className="text-xl font-semibold text-black dark:text-white">
                   {metrics.amount_redistributed}
                 </div>
