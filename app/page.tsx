@@ -1,4 +1,13 @@
-export default function Home() {
+import { getPublicMetricsCurrent } from "@/lib/supabase/public-metrics";
+
+export default async function Home() {
+  const metrics = (await getPublicMetricsCurrent()) ?? {
+    participants_count: 0,
+    projects_helped_count: 0,
+    amount_redistributed: 0,
+    currency: "XAF",
+  };
+
   return (
     <div className="bg-zinc-50 dark:bg-black">
       <section className="mx-auto w-full max-w-6xl px-4 py-14 md:py-20">
@@ -139,7 +148,7 @@ export default function Home() {
             <div className="mt-4 grid grid-cols-3 gap-3 text-center">
               <div className="rounded-2xl bg-zinc-50 p-4 dark:bg-white/5">
                 <div className="text-xl font-semibold text-black dark:text-white">
-                  0
+                  {metrics.participants_count}
                 </div>
                 <div className="text-xs text-black/60 dark:text-white/60">
                   participants
@@ -147,7 +156,7 @@ export default function Home() {
               </div>
               <div className="rounded-2xl bg-zinc-50 p-4 dark:bg-white/5">
                 <div className="text-xl font-semibold text-black dark:text-white">
-                  0
+                  {metrics.projects_helped_count}
                 </div>
                 <div className="text-xs text-black/60 dark:text-white/60">
                   projets aidés
@@ -155,16 +164,17 @@ export default function Home() {
               </div>
               <div className="rounded-2xl bg-zinc-50 p-4 dark:bg-white/5">
                 <div className="text-xl font-semibold text-black dark:text-white">
-                  0
+                  {metrics.amount_redistributed}
                 </div>
                 <div className="text-xs text-black/60 dark:text-white/60">
-                  redistribués
+                  redistribués ({metrics.currency})
                 </div>
               </div>
             </div>
             <p className="mt-3 text-xs leading-5 text-black/60 dark:text-white/60">
-              Ces chiffres seront mis à jour automatiquement à mesure que la V1
-              se connectera à Supabase.
+              Ces chiffres viennent de Supabase. Si les variables d’environnement
+              ne sont pas encore configurées, la page affiche des valeurs par
+              défaut.
             </p>
           </div>
         </div>
