@@ -44,7 +44,7 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href="/participer"
-            className="rounded-full bg-black px-4 py-2 text-sm font-semibold text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+            className="rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-foreground)] hover:bg-[var(--accent-hover)]"
           >
             Participer
           </a>

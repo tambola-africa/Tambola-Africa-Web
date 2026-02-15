@@ -30,7 +30,7 @@ export default async function Home() {
             <div className="flex flex-col gap-3 sm:flex-row">
               <a
                 href="/participer"
-                className="inline-flex items-center justify-center rounded-full bg-black px-6 py-3 text-sm font-semibold text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+                className="inline-flex items-center justify-center rounded-full bg-[var(--accent)] px-6 py-3 text-sm font-semibold text-[var(--accent-foreground)] hover:bg-[var(--accent-hover)]"
               >
                 Participer à la tambola
               </a>

@@ -50,7 +50,7 @@ export default function RetrouverTicketPage() {
 
         <button
           type="submit"
-          className="mt-6 h-12 w-full rounded-full bg-black px-6 text-sm font-semibold text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+          className="mt-6 h-12 w-full rounded-full bg-[var(--accent)] px-6 text-sm font-semibold text-[var(--accent-foreground)] hover:bg-[var(--accent-hover)]"
         >
           Rechercher
         </button>

@@ -37,7 +37,7 @@ export default function ParticiperPage() {
   const [error, setError] = useState<string>("");
 
   const estimatedAmountXaf = useMemo(() => {
-    const pricePerTicket = 1000;
+    const pricePerTicket = 2000;
     return state.ticketQuantity * pricePerTicket;
   }, [state.ticketQuantity]);
 
@@ -231,7 +231,7 @@ export default function ParticiperPage() {
                 </div>
                 <div className="mt-1">Total estimé : {estimatedAmountXaf} XAF</div>
                 <div className="mt-1 text-xs">
-                  Prix indicatif V1. Le tarif final sera défini par campagne.
+                  Prix par ticket : 2000 XAF. Le tarif peut évoluer selon la campagne.
                 </div>
               </div>
             </div>
@@ -252,7 +252,7 @@ export default function ParticiperPage() {
 
             <button
               type="submit"
-              className="h-12 w-full rounded-full bg-black px-6 text-sm font-semibold text-white hover:bg-black/90 dark:bg-white dark:text-black dark:hover:bg-white/90"
+              className="h-12 w-full rounded-full bg-[var(--accent)] px-6 text-sm font-semibold text-[var(--accent-foreground)] hover:bg-[var(--accent-hover)]"
             >
               Continuer (générer mon ticket V1)
             </button>

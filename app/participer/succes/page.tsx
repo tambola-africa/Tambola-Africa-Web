@@ -190,7 +190,7 @@ export default function SuccesPage() {
                   type="button"
                   onClick={downloadPdf}
                   disabled={!isReady}
-                  className="h-12 rounded-full bg-black px-6 text-sm font-semibold text-white hover:bg-black/90 disabled:opacity-50 dark:bg-white dark:text-black dark:hover:bg-white/90"
+                  className="h-12 rounded-full bg-[var(--accent)] px-6 text-sm font-semibold text-[var(--accent-foreground)] hover:bg-[var(--accent-hover)] disabled:opacity-50"
                 >
                   Télécharger le ticket PDF
                 </button>
