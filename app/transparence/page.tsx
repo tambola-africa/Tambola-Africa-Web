@@ -38,7 +38,7 @@ export default function TransparencePage() {
             Montants redistribués
           </div>
           <div className="mt-2 text-3xl font-semibold text-black dark:text-white">
-            0 XAF
+            0 FCFA
           </div>
           <div className="mt-2 text-sm text-black/70 dark:text-white/70">
             Montants d’aide versés aux bénéficiaires.

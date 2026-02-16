@@ -18,10 +18,12 @@ export async function getPublicMetricsCurrent(): Promise<PublicMetrics | null> {
 
   if (error || !data) return null;
 
+  const currency = String(data.currency ?? "FCFA");
+
   return {
     participants_count: Number(data.participants_count ?? 0),
     projects_helped_count: Number(data.projects_helped_count ?? 0),
     amount_redistributed: Number(data.amount_redistributed ?? 0),
-    currency: String(data.currency ?? "XAF"),
+    currency: currency === "XAF" ? "FCFA" : currency,
   };
 }

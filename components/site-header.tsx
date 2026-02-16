@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 export function SiteHeader() {
@@ -16,9 +17,9 @@ export function SiteHeader() {
   return (
     <header className="sticky top-0 z-50 border-b border-black/10 bg-white/80 backdrop-blur dark:border-white/10 dark:bg-black/60">
       <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-3">
-        <a href="/" className="font-semibold tracking-tight">
+        <Link href="/" className="font-semibold tracking-tight">
           Tambola solidaire
-        </a>
+        </Link>
 
         <nav className="hidden items-center gap-5 text-sm text-black/80 dark:text-white/80 md:flex">
           <a className="hover:text-[var(--gold-hover)] hover:underline" href="/fonctionnement">
@@ -44,13 +45,13 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href="/participer"
-            className="rounded-full bg-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent-foreground)] hover:bg-[var(--accent-hover)]"
+            className="rounded-full bg-[linear-gradient(135deg,var(--accent),var(--gold))] px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-black/10 hover:brightness-[0.98] dark:shadow-black/30"
           >
-            Participer
+            Participer (2000 FCFA)
           </a>
           <a
             href="/deposer-dossier"
-            className="hidden rounded-full border border-black/15 px-4 py-2 text-sm font-semibold hover:border-[var(--gold)] hover:bg-black/5 dark:border-white/15 dark:hover:bg-white/10 sm:inline-flex"
+            className="hidden rounded-full border border-[var(--gold)]/50 bg-white px-4 py-2 text-sm font-semibold text-black hover:border-[var(--gold)] hover:bg-[color-mix(in_srgb,var(--gold)_10%,white)] dark:border-[var(--gold)]/40 dark:bg-black dark:text-white dark:hover:bg-white/10 sm:inline-flex"
           >
             Déposer un dossier
           </a>
@@ -122,7 +123,7 @@ export function SiteHeader() {
               <a
                 href="/deposer-dossier"
                 onClick={() => setOpen(false)}
-                className="inline-flex h-12 items-center justify-center rounded-full border border-black/15 bg-white px-6 text-sm font-semibold text-black hover:bg-black/5 dark:border-white/15 dark:bg-black dark:text-white dark:hover:bg-white/10"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-[var(--gold)]/50 bg-white px-6 text-sm font-semibold text-black hover:border-[var(--gold)] hover:bg-[color-mix(in_srgb,var(--gold)_10%,white)] dark:border-[var(--gold)]/40 dark:bg-black dark:text-white dark:hover:bg-white/10"
               >
                 Déposer un dossier d’aide
               </a>

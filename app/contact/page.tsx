@@ -59,7 +59,7 @@ export default function ContactPage() {
 
         <button
           type="submit"
-          className="mt-6 h-12 w-full rounded-full bg-[var(--accent)] px-6 text-sm font-semibold text-[var(--accent-foreground)] hover:bg-[var(--accent-hover)]"
+          className="mt-6 h-12 w-full rounded-full bg-[linear-gradient(135deg,var(--accent),var(--gold))] px-6 text-sm font-semibold text-white shadow-sm shadow-black/10 hover:brightness-[0.98] dark:shadow-black/30"
         >
           Envoyer
         </button>

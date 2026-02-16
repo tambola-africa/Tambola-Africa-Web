@@ -27,28 +27,32 @@ function makeTicketCode() {
 }
 
 export default function SuccesPage() {
-  const [payload, setPayload] = useState<Payload | null>(null);
-  const [ticketCode, setTicketCode] = useState<string>("");
+  const [payload] = useState<Payload | null>(() => {
+    if (typeof window === "undefined") return null;
+    try {
+      const raw = sessionStorage.getItem("tambola_checkout_payload_v1");
+      if (!raw) return null;
+      return JSON.parse(raw) as Payload;
+    } catch {
+      return null;
+    }
+  });
+  const [ticketCode] = useState<string>(() => makeTicketCode());
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [isReady, setIsReady] = useState(false);
-  const [error, setError] = useState<string>("");
-
-  useEffect(() => {
+  const [error, setError] = useState<string>(() => {
+    if (typeof window === "undefined") return "";
     try {
       const raw = sessionStorage.getItem("tambola_checkout_payload_v1");
       if (!raw) {
-        setError(
-          "Aucune participation en cours. Revenez sur la page Participer pour générer un ticket.",
-        );
-        return;
+        return "Aucune participation en cours. Revenez sur la page Participer pour générer un ticket.";
       }
-      const parsed = JSON.parse(raw) as Payload;
-      setPayload(parsed);
-      setTicketCode(makeTicketCode());
+      JSON.parse(raw);
+      return "";
     } catch {
-      setError("Impossible de lire les informations de participation.");
+      return "Impossible de lire les informations de participation.";
     }
-  }, []);
+  });
 
   const qrPayload = useMemo(() => {
     if (!ticketCode) return "";
