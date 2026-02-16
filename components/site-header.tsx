@@ -49,12 +49,6 @@ export function SiteHeader() {
           >
             Participer (2000 FCFA)
           </a>
-          <a
-            href="/deposer-dossier"
-            className="hidden rounded-full border border-[var(--gold)]/50 bg-white px-4 py-2 text-sm font-semibold text-black hover:border-[var(--gold)] hover:bg-[color-mix(in_srgb,var(--gold)_10%,white)] dark:border-[var(--gold)]/40 dark:bg-black dark:text-white dark:hover:bg-white/10 sm:inline-flex"
-          >
-            Déposer un dossier
-          </a>
 
           <button
             type="button"
@@ -119,15 +113,6 @@ export function SiteHeader() {
               </a>
             </div>
 
-            <div className="mt-4 grid gap-2">
-              <a
-                href="/deposer-dossier"
-                onClick={() => setOpen(false)}
-                className="inline-flex h-12 items-center justify-center rounded-full border border-[var(--gold)]/50 bg-white px-6 text-sm font-semibold text-black hover:border-[var(--gold)] hover:bg-[color-mix(in_srgb,var(--gold)_10%,white)] dark:border-[var(--gold)]/40 dark:bg-black dark:text-white dark:hover:bg-white/10"
-              >
-                Déposer un dossier d’aide
-              </a>
-            </div>
           </div>
         </div>
       ) : null}

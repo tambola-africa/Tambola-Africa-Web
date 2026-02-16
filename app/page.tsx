@@ -43,12 +43,16 @@ export default async function Home() {
                 >
                   Participer à la tambola
                 </a>
-                <a
-                  href="/deposer-dossier"
-                  className="inline-flex items-center justify-center rounded-full border border-[var(--gold)]/45 bg-white px-6 py-3 text-sm font-semibold text-black hover:border-[var(--gold)] hover:bg-[color-mix(in_srgb,var(--gold)_10%,white)] dark:border-[var(--gold)]/35 dark:bg-black dark:text-white dark:hover:bg-white/10"
-                >
-                  Déposer un dossier d’aide
-                </a>
+              </div>
+              <div className="rounded-2xl border border-black/10 bg-white p-4 text-sm text-black/70 dark:border-white/10 dark:bg-black dark:text-white/70">
+                <div className="font-semibold text-black dark:text-white">
+                  10 bénéficiaires également sélectionnés
+                </div>
+                <div className="mt-1">
+                  En plus du grand gagnant, 10 personnes seront sélectionnées parmi
+                  les participants, en fonction du dossier communiqué pendant la
+                  participation (urgence, situation, parcours).
+                </div>
               </div>
               <div className="grid grid-cols-3 gap-4 rounded-2xl border border-black/10 bg-[var(--surface)] p-4 text-center dark:border-white/10 dark:bg-white/5">
                 <div>
