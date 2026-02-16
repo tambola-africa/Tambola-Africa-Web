@@ -34,8 +34,10 @@ export default function RootLayout({
 
           <main>{children}</main>
 
-          <footer className="border-t border-black/10 py-10 text-sm text-black/70 dark:border-white/10 dark:text-white/70">
-            <div className="h-1 w-full bg-[linear-gradient(90deg,var(--accent),var(--gold))]" />
+          <footer className="border-t border-black/10 py-12 text-sm text-black/70 dark:border-white/10 dark:text-white/70">
+            <div className="mx-auto w-full max-w-6xl px-4">
+              <div className="h-0.5 w-full bg-sky-600/35 dark:bg-sky-400/25" />
+            </div>
             <div className="mx-auto grid w-full max-w-6xl gap-6 px-4 md:grid-cols-3">
               <div className="space-y-2">
                 <div className="font-semibold text-black dark:text-white">

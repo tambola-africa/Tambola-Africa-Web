@@ -54,7 +54,7 @@ export default async function Home() {
                   participation (urgence, situation, parcours).
                 </div>
               </div>
-              <div className="grid grid-cols-3 gap-4 rounded-2xl border border-black/10 bg-[var(--surface)] p-4 text-center dark:border-white/10 dark:bg-white/5">
+              <div className="grid grid-cols-2 gap-4 rounded-2xl border border-black/10 bg-[var(--surface)] p-4 text-center dark:border-white/10 dark:bg-white/5">
                 <div>
                   <div className="text-2xl font-semibold text-black dark:text-white">
                     1
@@ -68,15 +68,7 @@ export default async function Home() {
                     10
                   </div>
                   <div className="text-xs text-black/60 dark:text-white/60">
-                    bénéficiaires / campagne
-                  </div>
-                </div>
-                <div>
-                  <div className="text-2xl font-semibold text-black dark:text-white">
-                    Mensuel
-                  </div>
-                  <div className="text-xs text-black/60 dark:text-white/60">
-                    si le projet fonctionne
+                    bénéficiaires / dossier
                   </div>
                 </div>
               </div>
