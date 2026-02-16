@@ -1,13 +1,4 @@
-import { getPublicMetricsCurrent } from "@/lib/supabase/public-metrics";
-
-export default async function Home() {
-  const metrics = (await getPublicMetricsCurrent()) ?? {
-    participants_count: 0,
-    projects_helped_count: 0,
-    amount_redistributed: 0,
-    currency: "XAF",
-  };
-
+export default function Home() {
   return (
     <div className="bg-zinc-50 dark:bg-black">
       <section className="bg-[linear-gradient(135deg,rgba(22,163,74,0.10),rgba(245,158,11,0.10))] dark:bg-[linear-gradient(135deg,rgba(34,197,94,0.12),rgba(251,191,36,0.10))]">
@@ -149,39 +140,12 @@ export default async function Home() {
           </div>
           <div className="rounded-3xl border border-black/10 border-t-4 border-t-[var(--gold)] bg-white p-6 dark:border-white/10 dark:bg-black">
             <h2 className="text-lg font-semibold text-black dark:text-white">
-              Nos impacts (compteurs)
+              Remise du lot en main propre et filmée
             </h2>
-            <div className="mt-4 grid grid-cols-3 gap-3 text-center">
-              <div className="rounded-2xl bg-[var(--surface)] p-4 dark:bg-white/5">
-                <div className="text-xl font-semibold text-black dark:text-white">
-                  {metrics.participants_count}
-                </div>
-                <div className="text-xs text-black/60 dark:text-white/60">
-                  participants
-                </div>
-              </div>
-              <div className="rounded-2xl bg-[var(--surface)] p-4 dark:bg-white/5">
-                <div className="text-xl font-semibold text-black dark:text-white">
-                  {metrics.projects_helped_count}
-                </div>
-                <div className="text-xs text-black/60 dark:text-white/60">
-                  projets aidés
-                </div>
-              </div>
-              <div className="rounded-2xl bg-[var(--surface)] p-4 dark:bg-white/5">
-                <div className="text-xl font-semibold text-black dark:text-white">
-                  {metrics.amount_redistributed}
-                </div>
-                <div className="text-xs text-black/60 dark:text-white/60">
-                  redistribués ({metrics.currency})
-                </div>
-              </div>
+            <div className="mt-3 rounded-2xl bg-[var(--surface)] p-4 text-sm leading-6 text-black/70 dark:bg-white/5 dark:text-white/70">
+              Le lot est remis au gagnant en main propre. La remise est filmée et
+              sera publiée pour garantir la transparence du tirage.
             </div>
-            <p className="mt-3 text-xs leading-5 text-black/60 dark:text-white/60">
-              Ces chiffres viennent de Supabase. Si les variables d’environnement
-              ne sont pas encore configurées, la page affiche des valeurs par
-              défaut.
-            </p>
           </div>
         </div>
       </section>
