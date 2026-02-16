@@ -45,9 +45,13 @@ export function SiteHeader() {
         <div className="flex items-center gap-2">
           <a
             href="/participer"
-            className="rounded-full bg-[linear-gradient(135deg,var(--accent),var(--gold))] px-4 py-2 text-sm font-semibold text-white shadow-sm shadow-black/10 hover:brightness-[0.98] dark:shadow-black/30"
+            className="rounded-full bg-[linear-gradient(135deg,var(--accent),var(--gold))] px-4 py-2 text-sm font-semibold leading-tight text-white shadow-sm shadow-black/10 hover:brightness-[0.98] dark:shadow-black/30"
           >
-            Participer (2000 FCFA)
+            <span className="block text-center md:hidden">
+              Participer
+              <span className="block text-xs font-semibold">2000 FCFA</span>
+            </span>
+            <span className="hidden md:inline">Participer (2000 FCFA)</span>
           </a>
 
           <button
