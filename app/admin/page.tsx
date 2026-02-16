@@ -2,12 +2,11 @@ export default function AdminPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 py-10">
       <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-white md:text-3xl">
-        Back-office admin (V1)
+        Back-office admin
       </h1>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-black/70 dark:text-white/70">
         Cet espace servira à gérer : campagnes mensuelles, ventes, dossiers, tickets
-        et vérification QR (Option B). La V1 pose la structure UI. La connexion à
-        Supabase et l’auth admin arriveront dans l’étape suivante.
+        et vérification QR (Option B).
       </p>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3">

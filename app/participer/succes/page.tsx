@@ -15,6 +15,7 @@ type Payload = {
   diasporaStatus: "local" | "diaspora";
   situation: string;
   projectOrUrgency: string;
+  selectionReason: string;
   influencerCode: string;
   acceptReglement: boolean;
 };
@@ -30,20 +31,35 @@ export default function SuccesPage() {
   const [payload] = useState<Payload | null>(() => {
     if (typeof window === "undefined") return null;
     try {
-      const raw = sessionStorage.getItem("tambola_checkout_payload_v1");
-      if (!raw) return null;
-      return JSON.parse(raw) as Payload;
+      const raw = sessionStorage.getItem("tambola_last_participation");
+      if (!raw) {
+        const legacy = sessionStorage.getItem("tambola_checkout_payload_v1");
+        if (!legacy) return null;
+        return JSON.parse(legacy) as Payload;
+      }
+      const parsed = JSON.parse(raw) as { payload?: Payload };
+      return parsed.payload ?? null;
     } catch {
       return null;
     }
   });
-  const [ticketCode] = useState<string>(() => makeTicketCode());
+  const [ticketCode] = useState<string>(() => {
+    if (typeof window === "undefined") return makeTicketCode();
+    try {
+      const raw = sessionStorage.getItem("tambola_last_participation");
+      if (!raw) return makeTicketCode();
+      const parsed = JSON.parse(raw) as { ticketCode?: string };
+      return parsed.ticketCode ?? makeTicketCode();
+    } catch {
+      return makeTicketCode();
+    }
+  });
   const [qrDataUrl, setQrDataUrl] = useState<string>("");
   const [isReady, setIsReady] = useState(false);
   const [error, setError] = useState<string>(() => {
     if (typeof window === "undefined") return "";
     try {
-      const raw = sessionStorage.getItem("tambola_checkout_payload_v1");
+      const raw = sessionStorage.getItem("tambola_last_participation");
       if (!raw) {
         return "Aucune participation en cours. Revenez sur la page Participer pour générer un ticket.";
       }
@@ -138,7 +154,7 @@ export default function SuccesPage() {
 
     doc.setFontSize(10);
     doc.text(
-      "V1 (démo) : le paiement et la base Supabase seront connectés dans la prochaine étape. Ce document valide le format ticket + QR + PDF.",
+      "Ce document confirme votre participation. Conservez-le : il sert de preuve et facilite la vérification.",
       margin,
       370,
       { maxWidth: width - margin * 2 },
@@ -151,7 +167,7 @@ export default function SuccesPage() {
     <div className="mx-auto w-full max-w-4xl px-4 py-10">
       <div className="rounded-3xl border border-black/10 bg-white p-6 dark:border-white/10 dark:bg-black">
         <h1 className="text-2xl font-semibold tracking-tight text-black dark:text-white">
-          Participation enregistrée (V1)
+          Participation enregistrée
         </h1>
         <p className="mt-2 text-sm leading-6 text-black/70 dark:text-white/70">
           Votre ticket est prêt. Conservez-le soigneusement : il sert de preuve et

@@ -6,8 +6,8 @@ export default function TransparencePage() {
       </h1>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-black/70 dark:text-white/70">
         Cette page est conçue pour afficher, campagne par campagne, les montants
-        collectés, la répartition, et les résultats. Elle deviendra publique et
-        vérifiable dès la connexion à Supabase.
+        collectés, la répartition, et les résultats. Nous publions régulièrement
+        ces informations afin de garantir une transparence maximale.
       </p>
 
       <div className="mt-10 grid gap-6 md:grid-cols-3">
@@ -48,7 +48,7 @@ export default function TransparencePage() {
 
       <div className="mt-10 rounded-3xl border border-black/10 bg-white p-6 text-sm text-black/70 dark:border-white/10 dark:bg-black dark:text-white/70">
         <div className="font-semibold text-black dark:text-white">
-          Ce que tu verras ici (V1.1)
+          Ce que vous trouverez ici
         </div>
         <div className="mt-2 grid gap-2">
           <div>- Répartition des fonds (frais, lot majeur, enveloppe d’aide)</div>

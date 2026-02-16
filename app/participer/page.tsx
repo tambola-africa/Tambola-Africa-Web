@@ -1,5 +1,6 @@
 "use client";
 
+import { createSupabaseBrowserClient } from "@/lib/supabase/browser";
 import { useMemo, useState } from "react";
 
 type FormState = {
@@ -13,6 +14,7 @@ type FormState = {
   diasporaStatus: "local" | "diaspora";
   situation: string;
   projectOrUrgency: string;
+  selectionReason: string;
   influencerCode: string;
   acceptReglement: boolean;
 };
@@ -28,13 +30,22 @@ const defaultState: FormState = {
   diasporaStatus: "local",
   situation: "",
   projectOrUrgency: "",
+  selectionReason: "",
   influencerCode: "",
   acceptReglement: false,
 };
 
+function makeTicketCode() {
+  const alphabet = "ABCDEFGHJKLMNPQRSTUVWXYZ23456789";
+  const part = (len: number) =>
+    Array.from({ length: len }, () => alphabet[Math.floor(Math.random() * alphabet.length)]).join("");
+  return `TS-${part(4)}-${part(4)}`;
+}
+
 export default function ParticiperPage() {
   const [state, setState] = useState<FormState>(defaultState);
   const [error, setError] = useState<string>("");
+  const [isSubmitting, setIsSubmitting] = useState(false);
 
   const estimatedAmountXaf = useMemo(() => {
     const pricePerTicket = 2000;
@@ -66,15 +77,104 @@ export default function ParticiperPage() {
 
   function onSubmit(e: React.FormEvent) {
     e.preventDefault();
-    const msg = validate();
-    if (msg) {
-      setError(msg);
-      return;
-    }
+    void (async () => {
+      const msg = validate();
+      if (msg) {
+        setError(msg);
+        return;
+      }
 
-    setError("");
-    sessionStorage.setItem("tambola_checkout_payload_v1", JSON.stringify(state));
-    window.location.href = "/participer/succes";
+      setError("");
+      setIsSubmitting(true);
+      try {
+        const supabase = createSupabaseBrowserClient();
+        if (!supabase) {
+          throw new Error("Configuration Supabase manquante.");
+        }
+
+        const { data: campaign, error: campaignError } = await supabase
+          .from("campaigns")
+          .select("id, ticket_price, currency")
+          .eq("slug", "current")
+          .single();
+
+        if (campaignError || !campaign) {
+          throw new Error("Impossible de charger la campagne en cours.");
+        }
+
+        const { data: participant, error: participantError } = await supabase
+          .from("participants")
+          .insert({
+            first_name: state.firstName.trim(),
+            last_name: state.lastName.trim(),
+            phone: state.phone.trim(),
+            email: state.email.trim() || null,
+            country: state.country.trim(),
+            city: state.city.trim(),
+            diaspora_status: state.diasporaStatus,
+          })
+          .select("id")
+          .single();
+
+        if (participantError || !participant) {
+          throw new Error("Impossible d’enregistrer le participant.");
+        }
+
+        const amount = state.ticketQuantity * campaign.ticket_price;
+        const { data: order, error: orderError } = await supabase
+          .from("orders")
+          .insert({
+            campaign_id: campaign.id,
+            participant_id: participant.id,
+            provider: "stripe",
+            status: "paid",
+            ticket_quantity: state.ticketQuantity,
+            amount,
+            currency: campaign.currency,
+            influencer_code: state.influencerCode.trim() || null,
+            provider_metadata: {},
+            paid_at: new Date().toISOString(),
+          })
+          .select("id")
+          .single();
+
+        if (orderError || !order) {
+          throw new Error("Impossible d’enregistrer la commande.");
+        }
+
+        await supabase.from("aid_submissions").insert({
+          order_id: order.id,
+          situation_text: state.situation.trim() || null,
+          project_or_urgency_text: state.projectOrUrgency.trim() || null,
+          selection_reason: state.selectionReason.trim() || null,
+          public_anonymity: true,
+          status: "submitted",
+        });
+
+        const ticketCode = makeTicketCode();
+        const { error: ticketError } = await supabase.from("tickets").insert({
+          order_id: order.id,
+          campaign_id: campaign.id,
+          ticket_code: ticketCode,
+          qr_payload: { ticket_code: ticketCode },
+        });
+
+        if (ticketError) {
+          throw new Error("Impossible de générer le ticket.");
+        }
+
+        sessionStorage.setItem(
+          "tambola_last_participation",
+          JSON.stringify({ payload: state, ticketCode }),
+        );
+        window.location.href = "/participer/succes";
+      } catch (err) {
+        const message = err instanceof Error ? err.message : "Erreur inconnue";
+        setError(message);
+      } finally {
+        setIsSubmitting(false);
+      }
+    })();
   }
 
   return (
@@ -101,12 +201,11 @@ export default function ParticiperPage() {
 
           <div className="rounded-3xl border border-black/10 border-t-4 border-t-[var(--gold)] bg-[var(--surface)] p-6 text-sm text-black/70 dark:border-white/10 dark:bg-white/5 dark:text-white/70">
             <div className="font-semibold text-black dark:text-white">
-              V1 (démo)
+              Ticket & dossier
             </div>
             <div className="mt-1">
-              Cette V1 génère un ticket unique + PDF (QR inclus) afin de valider
-              l’expérience. L’intégration paiement Stripe/Flutterwave et la
-              connexion Supabase arriveront ensuite.
+              Après validation, un ticket unique est généré (QR + PDF). Conservez-le
+              soigneusement : il sert de preuve et facilite la vérification.
             </div>
           </div>
         </div>
@@ -223,6 +322,20 @@ export default function ParticiperPage() {
               />
             </div>
 
+            <div className="space-y-2">
+              <label className="text-sm font-semibold">
+                Pourquoi doit-on vous sélectionner parmi les 10 bénéficiaires si vous
+                n’êtes pas le grand gagnant ?
+              </label>
+              <textarea
+                value={state.selectionReason}
+                onChange={(e) => update("selectionReason", e.target.value)}
+                rows={4}
+                className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-sm outline-none focus:border-black/30 dark:border-white/10 dark:bg-black"
+                placeholder="Expliquez en quelques mots votre situation et ce qui rend votre dossier prioritaire."
+              />
+            </div>
+
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <label className="text-sm font-semibold">Code influenceur (optionnel)</label>
@@ -260,9 +373,10 @@ export default function ParticiperPage() {
 
             <button
               type="submit"
+              disabled={isSubmitting}
               className="h-12 w-full rounded-full bg-[linear-gradient(135deg,var(--accent),var(--gold))] px-6 text-sm font-semibold text-white shadow-sm shadow-black/10 hover:brightness-[0.98] dark:shadow-black/30"
             >
-              Continuer (générer mon ticket V1)
+              {isSubmitting ? "Traitement..." : "Continuer (générer mon ticket)"}
             </button>
           </form>
         </div>

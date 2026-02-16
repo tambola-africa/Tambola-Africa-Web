@@ -2,7 +2,7 @@ export default function FaqPage() {
   const items: { q: string; a: string }[] = [
     {
       q: "Dois-je créer un compte pour participer ?",
-      a: "Non. La V1 permet de participer sans compte. Votre ticket (PDF) est votre preuve.",
+      a: "Non. La participation ne nécessite pas de compte. Votre ticket (PDF) est votre preuve.",
     },
     {
       q: "Puis-je être aidé même si je ne gagne pas la maison ?",

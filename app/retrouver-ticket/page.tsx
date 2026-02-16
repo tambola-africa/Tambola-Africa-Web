@@ -13,7 +13,7 @@ export default function RetrouverTicketPage() {
       return;
     }
     setMessage(
-      "V1 : la recherche sera disponible quand la base Supabase sera connectée. Pour l’instant, conservez le PDF téléchargé lors de la participation.",
+      "Pour retrouver vos informations, rendez-vous sur la page Compte et saisissez votre numéro de téléphone (ou votre code ticket).",
     );
   }
 
@@ -23,9 +23,8 @@ export default function RetrouverTicketPage() {
         Retrouver mon ticket
       </h1>
       <p className="mt-2 text-sm leading-6 text-black/70 dark:text-white/70">
-        Sans compte, votre ticket est votre référence. Dans la prochaine étape, vous
-        pourrez retrouver un ticket via votre numéro de téléphone et/ou une
-        vérification.
+        Sans compte, votre ticket est votre référence. Vous pouvez retrouver vos
+        tickets et vérifier un ticket depuis la page Compte.
       </p>
 
       <form
@@ -54,6 +53,13 @@ export default function RetrouverTicketPage() {
         >
           Rechercher
         </button>
+
+        <a
+          href="/compte"
+          className="mt-3 inline-flex w-full items-center justify-center rounded-full border border-black/15 bg-white px-6 py-3 text-sm font-semibold text-black hover:bg-black/5 dark:border-white/15 dark:bg-black dark:text-white dark:hover:bg-white/10"
+        >
+          Aller à la page Compte
+        </a>
       </form>
     </div>
   );

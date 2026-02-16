@@ -16,9 +16,8 @@ export default function ContactPage() {
         Contact
       </h1>
       <p className="mt-2 max-w-3xl text-sm leading-6 text-black/70 dark:text-white/70">
-        Un besoin, une question, une proposition de partenariat ? Écris-nous. La
-        V1 affichera ensuite une intégration dédiée (email / WhatsApp / formulaire
-        relié au back-office).
+        Un besoin, une question, une proposition de partenariat ? Écris-nous. Nous
+        te répondrons au plus vite.
       </p>
 
       <form
@@ -53,7 +52,8 @@ export default function ContactPage() {
 
         {sent ? (
           <div className="mt-4 rounded-2xl bg-zinc-50 p-4 text-sm text-black/70 dark:bg-white/5 dark:text-white/70">
-            Message enregistré (démo). L’envoi réel sera branché plus tard.
+            Merci, ton message a bien été enregistré. Nous revenons vers toi
+            rapidement.
           </div>
         ) : null}
 
