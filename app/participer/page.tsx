@@ -352,12 +352,9 @@ export default function ParticiperPage() {
                     />
                   </div>
                   <div className="rounded-2xl border border-black/10 border-t-4 border-t-[var(--gold)] bg-[var(--surface)] p-4 text-sm text-black/70 dark:border-white/10 dark:bg-white/5 dark:text-white/70">
-                    <div className="font-semibold text-black dark:text-white">
-                      Estimation
-                    </div>
-                    <div className="mt-1">Total estimé : {estimatedAmountXaf} FCFA</div>
+                    <div className="mt-1">Total : {estimatedAmountXaf} FCFA</div>
                     <div className="mt-1 text-xs">
-                      Prix par ticket : 2000 FCFA. Le tarif peut évoluer selon la campagne.
+                      Prix par ticket : 2000 FCFA.
                     </div>
                   </div>
                 </div>
